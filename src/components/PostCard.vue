@@ -2,7 +2,9 @@
     <section class="">
         <section class="card m-4">
             <div class="m-3">
-                <img :src="postProp.creator.picture" alt="" class="creator-img col-3">
+                <router-link :to="{ name: 'Profile', params: { profileId: postProp.creatorId } }">
+                    <img :src="postProp.creator.picture" alt="" class="creator-img col-3">
+                </router-link>
                 <span class="fs-5 fw-bold mx-3">{{ postProp.creator.name }}</span>
             </div>
 

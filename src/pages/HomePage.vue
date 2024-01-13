@@ -1,7 +1,13 @@
 <template>
   <section class="container-fluid">
     <section class="row">
-      <div class="col-8">
+      <div class="col-4">
+        <div class="sticky-top">
+          <PostForm />
+        </div>
+      </div>
+
+      <div class="col-6">
         <div v-for="post in posts" class="">
           <PostCard :postProp="post" />
         </div>
@@ -15,6 +21,8 @@ import Pop from '../utils/Pop.js';
 import { postService } from '../services/PostService.js'
 import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState.js';
+import PostCard from '../components/PostCard.vue';
+import PostForm from '../components/PostForm.vue';
 
 export default {
   setup() {
