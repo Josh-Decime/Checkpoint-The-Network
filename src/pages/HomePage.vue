@@ -26,6 +26,7 @@ import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState.js';
 import PostCard from '../components/PostCard.vue';
 import PostForm from '../components/PostForm.vue';
+import { sponsorService } from '../services/SponsorService.js';
 
 export default {
   setup() {
@@ -37,6 +38,15 @@ export default {
       }
     }
     onMounted(() => getPosts())
+
+    async function getSponsors() {
+      try {
+        await sponsorService.getSponsors()
+      } catch (error) {
+        Pop.error(error)
+      }
+    }
+    onMounted(() => getSponsors())
 
 
 
