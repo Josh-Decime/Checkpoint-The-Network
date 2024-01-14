@@ -17,8 +17,10 @@
       </div>
 
       <div class="col-2">
-        <div v-for="sponsor in sponsors">
-          <SponsorCard :sponsorProp="sponsor" />
+        <div class="sticky-top">
+          <div v-for="sponsor in sponsors">
+            <SponsorCard :sponsorProp="sponsor" />
+          </div>
         </div>
       </div>
     </section>
@@ -85,5 +87,10 @@ export default {
       object-position: center;
     }
   }
+
+
+
+
+
 }
 </style>

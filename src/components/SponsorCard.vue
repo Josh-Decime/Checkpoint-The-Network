@@ -1,12 +1,9 @@
 <template>
-    <div>
-        <div class=" mt-5">
-            <a :href="`https://www.${sponsorProp.linkURL}`">
-                <img :src="sponsorProp.tall" :alt="`Sponsored content by ${sponsorProp.title}`"
-                    :title="`Sponsored content by ${sponsorProp.title}`" class="sponsor-img">
-            </a>
-        </div>
-
+    <div class=" pt-5">
+        <a :href="`https://www.${sponsorProp.linkURL}`">
+            <img :src="sponsorProp.tall" :alt="`Sponsored content by ${sponsorProp.title}`"
+                :title="`Sponsored content by ${sponsorProp.title}`" class="sponsor-img">
+        </a>
     </div>
 </template>
 
