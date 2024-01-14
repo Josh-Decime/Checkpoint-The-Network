@@ -11,7 +11,8 @@
 
                 <div v-if="postProp.creator.id == account.id">
                     <button @click="deletePost(postProp.id)"
-                        class="btn btn-outline mx-3 mdi fs-2  mdi-delete-circle-outline"></button>
+                        class="btn btn-outline mx-3 mdi fs-2 text-danger mdi-delete-circle-outline"
+                        title="Delete post"></button>
                 </div>
             </div>
 
@@ -22,8 +23,8 @@
                 <p class="mx-3">{{ postProp.longDate }}</p>
                 <div class="mx-3 my-2">
                     <!-- TODO if i can figure out how to v-if="you liked that post" then i can change the icon to show if you liked it or not -->
-                    <span v-if="account.id" class="mdi mdi-heart-outline fs-3 mx-1" @click="likePost(postProp.id)"
-                        title="Like post">
+                    <span v-if="account.id" class="mdi mdi-heart-outline fs-3 mx-1 clickable-icon"
+                        @click="likePost(postProp.id)" title="Like post">
                     </span>
                     <span v-else class="mdi mdi-heart fs-3 mx-1" @click="loginToLike()"></span>
                     <span class="fs-4">{{ postProp.likes.length }}</span>
@@ -96,5 +97,9 @@ export default {
     object-fit: cover;
     object-position: center;
     border-radius: 50%;
+}
+
+.clickable-icon {
+    cursor: pointer;
 }
 </style>
