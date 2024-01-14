@@ -14,7 +14,8 @@
             <div class="d-flex justify-content-between align-items-center">
                 <p class="mx-3">{{ postProp.longDate }}</p>
                 <div class="mx-3 my-2">
-                    <span class="mdi mdi-heart-outline fs-3 mx-1"></span>
+                    <span v-if="account.id" class="mdi mdi-heart-outline fs-3 mx-1" @click="likePost(postProp.id)"></span>
+                    <span v-else class="mdi mdi-heart fs-3 mx-1" @click="loginToLike()"></span>
                     <span class="fs-4">{{ postProp.likes.length }}</span>
                 </div>
 
@@ -30,6 +31,8 @@
 import { AppState } from '../AppState';
 import { computed, ref, onMounted } from 'vue';
 import { Post } from '../models/Post.js';
+import Pop from '../utils/Pop.js';
+import { postService } from '../services/PostService.js';
 export default {
     props: {
         postProp: { type: Post, required: true }
@@ -40,9 +43,20 @@ export default {
         //     time = postProp.createdAt
         // }
 
-
         return {
+            account: computed(() => AppState.account),
 
+            async likePost(postId) {
+                try {
+                    await postService.likePost(postId)
+                } catch (error) {
+                    Pop.error(error)
+                }
+            },
+
+            loginToLike() {
+                Pop.error('Log in to like posts')
+            }
 
 
         }

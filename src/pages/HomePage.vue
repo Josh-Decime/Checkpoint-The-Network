@@ -2,8 +2,11 @@
   <section class="container-fluid">
     <section class="row">
       <div class="col-4">
-        <div class="sticky-top">
+        <div class="sticky-top" v-if="account.id">
           <PostForm />
+        </div>
+        <div v-else>
+          <h1 class="m-3">Log in to create posts!</h1>
         </div>
       </div>
 
@@ -39,7 +42,8 @@ export default {
 
 
     return {
-      posts: computed(() => AppState.posts)
+      posts: computed(() => AppState.posts),
+      account: computed(() => AppState.account)
     }
   }
 }
