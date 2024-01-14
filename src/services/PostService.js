@@ -21,10 +21,19 @@ class PostService {
         logger.log('post Id:', postId)
         const response = await api.post(`/api/posts/${postId}/like`)
     }
+
+
+    async deletePost(postId) {
+        const response = await api.delete(`/api/posts/${postId}`)
+        logger.log('deleting post response to api:', response.data)
+        const indexToRemove = AppState.posts.findIndex(post => post.id == postId)
+        AppState.posts.splice(indexToRemove, 1)
+    }
+
+
+
+
 }
-
-
-
 
 
 export const postService = new PostService()
