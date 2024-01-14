@@ -8,4 +8,7 @@ export const AppState = reactive({
 
   /**@type {import('./models/Post.js').Post} */
   posts: [],
+
+  /**@type {import('./models/Sponsor.js').Sponsor} */
+  sponsors: [],
 })
