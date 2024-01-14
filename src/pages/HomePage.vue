@@ -15,6 +15,12 @@
           <PostCard :postProp="post" />
         </div>
       </div>
+
+      <div class="col-2">
+        <div v-for="sponsor in sponsors">
+          <SponsorCard :sponsorProp="sponsor" />
+        </div>
+      </div>
     </section>
   </section>
 </template>
@@ -53,7 +59,8 @@ export default {
 
     return {
       posts: computed(() => AppState.posts),
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
+      sponsors: computed(() => AppState.sponsors),
     }
   }
 }
