@@ -11,4 +11,7 @@ export const AppState = reactive({
 
   /**@type {import('./models/Sponsor.js').Sponsor} */
   sponsors: [],
+
+  /**@type {import('./models/Profile.js').Profile || null} */
+  activeProfile: null,
 })

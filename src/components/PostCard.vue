@@ -4,7 +4,8 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div class="m-3 ">
                     <router-link :to="{ name: 'Profile', params: { profileId: postProp.creatorId } }">
-                        <img :src="postProp.creator.picture" alt="" class="creator-img col-3">
+                        <img :src="postProp.creator.picture" :alt="`${postProp.creator.name}'s profile image`"
+                            :title="`View ${postProp.creator.name}'s profile`" class="creator-img col-3">
                     </router-link>
                     <span class="fs-5 fw-bold mx-3">{{ postProp.creator.name }}</span>
                 </div>
@@ -51,9 +52,6 @@ export default {
     },
     setup() {
 
-        // function displayTime(postProp.createdAt){
-        //     time = postProp.createdAt
-        // }
 
         return {
             account: computed(() => AppState.account),
