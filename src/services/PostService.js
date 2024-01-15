@@ -33,8 +33,12 @@ class PostService {
     async getPostsByProfileId(profileId) {
         const response = await api.get(`/api/posts?creatorId=${profileId}`)
         logger.log('posts got with profile ID:', response.data)
-        // const newPost = response.data.posts.map()
-
+        const newPost = response.data.posts.map(post => new Post(post))
+        AppState.profilePosts = newPost
+    }
+    clearAppState() {
+        AppState.activeProfile = null
+        AppState.profilePosts = []
     }
 
 

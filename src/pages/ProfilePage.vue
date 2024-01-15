@@ -83,12 +83,14 @@ export default {
                 Pop.error(error)
             }
         }
-        onMounted(() => getPostsByProfileId())
+        // onMounted(() => getPostsByProfileId())
 
 
         watch(watchableProfileId, () => {
             logger.log('Route:', route)
+            postService.clearAppState()
             getProfileById()
+            getPostsByProfileId()
         },
             { immediate: true }
         )
@@ -107,6 +109,7 @@ export default {
             profile: computed(() => AppState.activeProfile),
             account: computed(() => AppState.account),
             sponsors: computed(() => AppState.sponsors),
+            posts: computed(() => AppState.profilePosts)
         }
     }
 };
