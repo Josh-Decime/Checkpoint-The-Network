@@ -37,6 +37,15 @@
                 <div v-for="post in posts" class="">
                     <PostCard :postProp="post" />
                 </div>
+
+                <section class="d-flex justify-content-around">
+                    <button @click="changePage(currentPage - 1)" :disabled="currentPage == 1"
+                        class="btn btn-outline mx-5 mb-3 fs-4 text-primary"><i class="mdi mdi-arrow-left-bold"></i>
+                        Newer</button>
+                    <button @click="changePage(currentPage + 1)" :disabled="currentPage == totalPages"
+                        class="btn btn-outline mx-5 mb-3 fs-4 text-primary">Older <i class="mdi mdi-arrow-right-bold">
+                        </i></button>
+                </section>
             </div>
 
             <div class="col-2">
@@ -109,7 +118,19 @@ export default {
             profile: computed(() => AppState.activeProfile),
             account: computed(() => AppState.account),
             sponsors: computed(() => AppState.sponsors),
-            posts: computed(() => AppState.profilePosts)
+            posts: computed(() => AppState.profilePosts),
+            currentPage: computed(() => AppState.currentPage),
+            totalPages: computed(() => AppState.totalPages),
+
+            async changePage(currentPage) {
+                try {
+                    const profileId = route.params.profileId
+                    logger.log('current page & profile Id:', currentPage, profileId)
+                    await postService.changePage(`/api/posts?creatorId=${profileId}&page=${currentPage}`)
+                } catch (error) {
+                    Pop.error(error)
+                }
+            }
         }
     }
 };

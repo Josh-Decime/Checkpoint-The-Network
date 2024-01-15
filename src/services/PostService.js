@@ -40,6 +40,8 @@ class PostService {
         logger.log('posts got with profile ID:', response.data)
         const newPost = response.data.posts.map(post => new Post(post))
         AppState.profilePosts = newPost
+        AppState.currentPage = response.data.page
+        AppState.totalPages = response.data.totalPages
     }
     clearAppState() {
         AppState.activeProfile = null
