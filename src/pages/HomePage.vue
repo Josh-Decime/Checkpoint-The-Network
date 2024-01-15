@@ -26,7 +26,7 @@
       </section>
 
       <section class="col-2">
-        <div class="sticky-top">
+        <div class="sticky-top mt-5">
           <div v-for="sponsor in sponsors">
             <SponsorCard :sponsorProp="sponsor" />
           </div>
