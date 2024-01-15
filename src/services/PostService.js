@@ -10,6 +10,8 @@ class PostService {
         const newPosts = response.data.posts.map(post => new Post(post))
         AppState.posts = newPosts
         logger.log('Posts in AppState:', AppState.posts)
+        AppState.currentPage = response.data.page
+        AppState.totalPages = response.data.totalPages
     }
 
     async createPost(postData) {
@@ -20,6 +22,9 @@ class PostService {
     async likePost(postId) {
         logger.log('post Id:', postId)
         const response = await api.post(`/api/posts/${postId}/like`)
+        logger.log('liked post:', response.data)
+        const indexToUpdate = AppState.posts.findIndex(post => post.id == postId)
+        AppState.posts.splice(indexToUpdate, 1, new Post(response.data))
     }
 
 
@@ -39,6 +44,14 @@ class PostService {
     clearAppState() {
         AppState.activeProfile = null
         AppState.profilePosts = []
+    }
+
+    async changePage(url) {
+        const response = await api.get(url)
+        logger.log('response data to change pages:', response.data)
+        AppState.posts = response.data.posts.map(post => new Post(post))
+        AppState.currentPage = response.data.page
+        AppState.totalPages = response.data.totalPages
     }
 
 

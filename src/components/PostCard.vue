@@ -59,7 +59,6 @@ export default {
             async likePost(postId) {
                 try {
                     await postService.likePost(postId)
-                    await postService.getPosts()
                     Pop.success('Post liked')
                 } catch (error) {
                     Pop.error(error)

@@ -1,28 +1,37 @@
 <template>
   <section class="container-fluid">
     <section class="row">
-      <div class="col-4">
+      <section class="col-4">
         <div class="sticky-top" v-if="account.id">
           <PostForm />
         </div>
         <div v-else>
           <h1 class="m-3">Log in to create posts!</h1>
         </div>
-      </div>
+      </section>
 
-      <div class="col-6">
+      <section class="col-6">
         <div v-for="post in posts" class="">
           <PostCard :postProp="post" />
         </div>
-      </div>
 
-      <div class="col-2">
+        <section class="d-flex justify-content-around">
+          <button @click="changePage(currentPage - 1)" :disabled="currentPage == 1"
+            class="btn btn-outline mx-5 mb-3 fs-4 text-primary"><i class="mdi mdi-arrow-left-bold"></i>
+            Newer</button>
+          <button @click="changePage(currentPage + 1)" :disabled="currentPage == totalPages"
+            class="btn btn-outline mx-5 mb-3 fs-4 text-primary">Older <i class="mdi mdi-arrow-right-bold">
+            </i></button>
+        </section>
+      </section>
+
+      <section class="col-2">
         <div class="sticky-top">
           <div v-for="sponsor in sponsors">
             <SponsorCard :sponsorProp="sponsor" />
           </div>
         </div>
-      </div>
+      </section>
     </section>
   </section>
 </template>
@@ -63,6 +72,16 @@ export default {
       posts: computed(() => AppState.posts),
       account: computed(() => AppState.account),
       sponsors: computed(() => AppState.sponsors),
+      currentPage: computed(() => AppState.currentPage),
+      totalPages: computed(() => AppState.totalPages),
+
+      async changePage(pageNumber) {
+        try {
+          await postService.changePage(`/api/posts?page=${pageNumber}`)
+        } catch (error) {
+          Pop.error(error)
+        }
+      }
     }
   }
 }
