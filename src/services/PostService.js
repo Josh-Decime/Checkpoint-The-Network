@@ -30,6 +30,12 @@ class PostService {
         AppState.posts.splice(indexToRemove, 1)
     }
 
+    async getPostsByProfileId(profileId) {
+        const response = await api.get(`/api/posts?creatorId=${profileId}`)
+        logger.log('posts got with profile ID:', response.data)
+        // const newPost = response.data.posts.map()
+
+    }
 
 
 

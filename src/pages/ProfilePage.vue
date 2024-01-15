@@ -11,11 +11,31 @@
             </div>
 
             <div class="col-6">
-                <div v-if="profile" class="card m-3">
-                    <img :src="profile.coverImg" alt="" class="img-fluid cover-img">
+                <div v-if="profile" class="card m-3 ">
+                    <img :src="profile.coverImg" alt="" class="img-fluid cover-img position-parent">
                     <img :src="profile.picture" :alt="`${profile.name}'s profile picture'`" class="creator-img">
-                    <h1>{{ profile.name }}</h1>
-                    <p>{{ profile.bio }}</p>
+                    <h1 class="profile-name">{{ profile.name }}</h1>
+                    <p class="profile-bio">{{ profile.bio }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p v-if="profile.graduated" class="mx-4">{{ profile.name }} has graduated! 🎓</p>
+                            <p v-else class="mx-4">{{ profile.name }} has not graduated </p>
+                        </div>
+                        <div>
+                            <a v-if="profile.github" :href="`${profile.github}`"
+                                :title="`${profile.name}'s github takes you to ${profile.github}'`">
+                                <span class="mdi mdi-github me-3 fs-1"></span>
+                            </a>
+                            <a v-if="profile.linkedin" :href="`${profile.linkedin}`"
+                                :title="`${profile.name}'s linkedin takes you to ${profile.linkedin}'`">
+                                <span class="mdi mdi-linkedin me-5 fs-1"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <p v-if="profile.class" class="mx-4 mt-0">Attended: {{ profile.class }}</p>
+                </div>
+                <div v-for="post in posts" class="">
+                    <PostCard :postProp="post" />
                 </div>
             </div>
 
@@ -39,6 +59,7 @@ import Pop from '../utils/Pop.js';
 import { profileService } from '../services/ProfileService.js';
 import { logger } from '../utils/Logger.js';
 import { sponsorService } from '../services/SponsorService.js';
+import { postService } from '../services/PostService.js';
 export default {
     setup() {
 
@@ -54,6 +75,15 @@ export default {
                 Pop.error(error)
             }
         }
+        async function getPostsByProfileId() {
+            try {
+                const profileId = route.params.profileId
+                await postService.getPostsByProfileId(profileId)
+            } catch (error) {
+                Pop.error(error)
+            }
+        }
+        onMounted(() => getPostsByProfileId())
 
 
         watch(watchableProfileId, () => {
@@ -90,13 +120,42 @@ export default {
     object-fit: cover;
     object-position: center;
     border-radius: 50%;
+    // position: absolute;
+    // top: 10px;
+    // margin-left: -30px;
     position: relative;
-    top: -80px;
+    top: -60px;
     margin-left: 30px;
+
 }
 
 .cover-img {
-    border-radius: 15px, 15px, 0, 0;
-    overflow: hidden;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    max-height: 250px;
+    object-fit: cover;
+}
+
+.position-parent {
+    position: relative;
+}
+
+.profile-name {
+    position: relative;
+    top: -40px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.profile-bio {
+    position: relative;
+    top: -20px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.socials {
+    position: relative;
+    top: -80px;
 }
 </style>
