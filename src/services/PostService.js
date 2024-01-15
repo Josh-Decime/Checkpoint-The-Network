@@ -39,13 +39,13 @@ class PostService {
         const response = await api.get(`/api/posts?creatorId=${profileId}`)
         logger.log('posts got with profile ID:', response.data)
         const newPost = response.data.posts.map(post => new Post(post))
-        AppState.profilePosts = newPost
+        AppState.posts = newPost
         AppState.currentPage = response.data.page
         AppState.totalPages = response.data.totalPages
     }
     clearAppState() {
         AppState.activeProfile = null
-        AppState.profilePosts = []
+        AppState.posts = []
     }
 
     async changePage(url) {

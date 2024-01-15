@@ -118,7 +118,7 @@ export default {
             profile: computed(() => AppState.activeProfile),
             account: computed(() => AppState.account),
             sponsors: computed(() => AppState.sponsors),
-            posts: computed(() => AppState.profilePosts),
+            posts: computed(() => AppState.posts),
             currentPage: computed(() => AppState.currentPage),
             totalPages: computed(() => AppState.totalPages),
 
