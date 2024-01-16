@@ -26,9 +26,11 @@
                     <!-- TODO if i can figure out how to v-if="you liked that post" then i can change the icon to show if you liked it or not -->
                     <div v-if="account.id">
                         <span v-if="postProp.likes.find(like => like.id === account.id)"
-                            class="mdi mdi-heart fs-3 mx-1 clickable-icon" @click="likePost(postProp.id)" title="Like post">
+                            class="mdi mdi-heart fs-3 mx-1 clickable-icon text-danger" @click="likePost(postProp.id)"
+                            title="Like post">
                         </span>
-                        <span v-else class="mdi mdi-heart-outline fs-3 mx-1" @click="likePost(postProp.id)"></span>
+                        <span v-else class="mdi mdi-heart-outline fs-3 mx-1 clickable-icon"
+                            @click="likePost(postProp.id)"></span>
                         <span class="fs-4">{{ postProp.likes.length }}</span>
                     </div>
                     <div v-else>

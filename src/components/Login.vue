@@ -1,6 +1,6 @@
 <template>
-  <span class="navbar-text">
-    <button class="btn selectable text-success lighten-30 text-uppercase my-2 my-lg-0" @click="login"
+  <span class="navbar-text ">
+    <button class="btn selectable text-success lighten-30 text-uppercase my-2 my-lg-0 " @click="login"
       v-if="!user.isAuthenticated">
       Login
     </button>
@@ -49,4 +49,12 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.login-style {
+  height: 7vh;
+  width: 7vh;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+}
+</style>
